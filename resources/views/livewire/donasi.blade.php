@@ -1,5 +1,6 @@
 {{-- <title>Volt Laravel Dashboard - User management</title> --}}
 <div>
+
     <div class="d-block mb-4 mb-md-0">
         <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
             <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
@@ -14,11 +15,16 @@
                     </a>
                 </li>
                 <li class="breadcrumb-item"><a href="#">Volt</a></li>
-                <li class="breadcrumb-item active" aria-current="page">user</li>
+                <li class="breadcrumb-item active" aria-current="page">donasi</li>
             </ol>
         </nav>
-        <h2 class="h4">Daftar Staff</h2>
+        <h2 class="h4">Daftar Donasi</h2>
         {{-- <p class="mb-0">Your web analytics dashboard template.</p> --}}
+    </div>
+
+    <div class="input-group mb-3">
+        <input wire:model="search" type="text" class="form-control" placeholder="Cari donasi...">
+        <button class="btn btn-outline-secondary" type="button" id="button-addon2">Cari</button>
     </div>
 
     @if(session()->has('message'))
@@ -33,16 +39,15 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6">
                 </path>
             </svg>
-            Tambah Staff
+            Tambah Donasi
         </button>        
     </div>
-    
 
     @if($isOpen)
-        @include('livewire.staff-create')
+        @include('livewire.doansi-create')
     @endif
     @if($isOpenDetail)
-        @include('livewire.staff-detail')
+        @include('livewire.donasi-detail')
     @endif
 
     <div class="card border-0 shadow mb-4">
@@ -51,31 +56,35 @@
                 <table class="table table-centered table-nowrap mb-0 rounded">
                     <thead class="thead-light">
                         <tr>
-                            <th>Nama Lengkap</th>
-                            <th>Email</th>
-                            <th>Tanggal Lahir</th>
-                            <th>Alamat</th>                                                     
-                            <th>Status</th>                                                     
+                           
+                            <th>Tanggal</th>
+                            <th>Nama Donatur</th>
+                            <th>Jenis Donasi</th>
+                            <th>Jumlah</th>
+                            <th>Keterangan</th>                            
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($users as $user)
-                            <tr>
-                                <td>{{ $user->full_name }}</td>
-                                <td>{{ $user->email }}</td>
-                                <td>{{ $user->tempat_tanggal_lahir }}</td>
-                                <td>{{ $user->alamat1 }}</td>
-                                <td>{{$user->status}}</td>                                                              
+                        @foreach($donasis as $donasi)
+                            <tr>                                
+                                <td>{{ $donasi->tanggal }}</td>
+                                <td>{{ $donasi->donatur->full_name }}</td>
+                                <td>{{ $donasi->jenis_donasi }}</td>
+                                <td>{{ $donasi->jumlah }}</td>
+                                <td>{{ $donasi->keterangan }}</td>                                
                                 <td>
-                                    <button wire:click="edit({{ $user->id }})" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i></button>
-                                    <button wire:click="delete({{ $user->id }})" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
-                                    <button wire:click="showDetail({{ $user->id }})" class="btn btn-info btn-sm"><i class="fa fa-eye"></i></button>
+                                    <button wire:click="edit({{ $donasi->id }})" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i></button>
+                                    <button wire:click="delete({{ $donasi->id }})" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
+                                    <button wire:click="showDetail({{ $donasi->id }})" class="btn btn-info btn-sm"><i class="fa fa-eye"></i></button>
                                 </td>
                             </tr>
                         @endforeach
                     </tbody>
                 </table>
+                <div class="d-flex justify-content-center">
+                    {{ $donasis->links() }}
+                </div>
             </div>
         </div>
     </div>

@@ -6,17 +6,7 @@
           <img src="/assets/img/team/profile-picture-3.jpg" class="card-img-top rounded-circle border-white"
             alt="Bonnie Green">
         </div>
-        <div class="d-block">
-          <h2 class="h5 mb-3">Hi, Jane</h2>
-          <a href="/login" class="btn btn-secondary btn-sm d-inline-flex align-items-center">
-            <svg class="icon icon-xxs me-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
-            </svg>
-            Sign Out
-          </a>
-        </div>
+        
       </div>
       <div class="collapse-close d-md-none">
         <a href="#sidebarMenu" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu"
@@ -33,10 +23,10 @@
       <li class="nav-item">
         <a href="/dashboard" class="nav-link d-flex align-items-center">
           <span class="sidebar-icon me-3">
-            <img src="/assets/img/brand/light.svg" height="20" width="20" alt="Volt Logo">
+            <img src="https://jadimanfaat.org/uploads/logo/1707337747ltdeq-favicon.png" height="20" width="20" alt="Volt Logo">
           </span>
           <span class="mt-1 ms-1 sidebar-text">
-            Volt Laravel
+           Monitoring donasi
           </span>
         </a>
       </li>
@@ -50,7 +40,7 @@
           <span class="sidebar-text">Dashboard</span>
         </a>
       </li>
-      <li class="nav-item">
+      {{-- <li class="nav-item">
         <span class="nav-link collapsed d-flex justify-content-between align-items-center" data-bs-toggle="collapse"
           data-bs-target="#submenu-laravel" aria-expanded="true">
           <span>
@@ -71,32 +61,74 @@
                 <span class="sidebar-text">Profile</span>
               </a>
             </li>
-            <li class="nav-item {{ Request::segment(1) == 'users' ? 'active' : '' }}">
-              <a href="/users" class="nav-link">
-                <span class="sidebar-text">User management</span>
-              </a>
-            </li>
+            @if(auth()->user()->status == 'admin')
+              <li class="nav-item {{ Request::segment(1) == 'users' ? 'active' : '' }}">
+                <a href="/users" class="nav-link">
+                  <span class="sidebar-text">User management</span>
+                </a>
+              </li>
+           @endif
           </ul>
         </div>
-      </li>
-      <li class="nav-item">
-        <a href="https://themesberg.com/product/laravel/volt-pro-admin-dashboard-template" target="_blank" class="nav-link d-flex justify-content-between">
-          <span>
+      </li> --}}
+      @if(auth()->user()->status == 'admin')
+        <li class="nav-item {{ Request::segment(1) == 'users' ? 'active' : '' }}">
+          <a href="/users" class="nav-link">
             <span class="sidebar-icon"><svg class="icon icon-xs me-2" fill="currentColor" viewBox="0 0 20 20"
                 xmlns="http://www.w3.org/2000/svg">
-                <path
-                  d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z">
-                </path>
+                {{-- <path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z"></path> --}}
+                <path fill-rule="evenodd"
+                  d="M14.023,12.154c1.514-1.192,2.488-3.038,2.488-5.114c0-3.597-2.914-6.512-6.512-6.512
+								c-3.597,0-6.512,2.916-6.512,6.512c0,2.076,0.975,3.922,2.489,5.114c-2.714,1.385-4.625,4.117-4.836,7.318h1.186
+								c0.229-2.998,2.177-5.512,4.86-6.566c0.853,0.41,1.804,0.646,2.813,0.646c1.01,0,1.961-0.236,2.812-0.646
+								c2.684,1.055,4.633,3.568,4.859,6.566h1.188C18.648,16.271,16.736,13.539,14.023,12.154z M10,12.367
+								c-2.943,0-5.328-2.385-5.328-5.327c0-2.943,2.385-5.328,5.328-5.328c2.943,0,5.328,2.385,5.328,5.328
+								C15.328,9.982,12.943,12.367,10,12.367z"
+                  clip-rule="evenodd"></path>
               </svg></span>
-            <span class="sidebar-text">Kanban </span>
-          </span>
-          <span>
-            <span class="badge badge-sm bg-secondary ms-1">Pro</span>
-          </span>
+            <span class="sidebar-text">Staff</span>
+          </a>
+        </li>
+      @endif
+      
+      <li class="nav-item {{ Request::segment(1) == 'donasi' ? 'active' : '' }}">
+        <a href="/donasi" class="nav-link">
+          <span class="sidebar-icon"><svg class="icon icon-xs me-2" fill="currentColor" viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg">
+              {{-- <path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z"></path> --}}
+              <path fill-rule="evenodd"
+                d="M14.781,14.347h1.738c0.24,0,0.436-0.194,0.436-0.435v-1.739c0-0.239-0.195-0.435-0.436-0.435h-1.738c-0.239,0-0.435,0.195-0.435,0.435v1.739C14.347,14.152,14.542,14.347,14.781,14.347 M18.693,3.045H1.307c-0.48,0-0.869,0.39-0.869,0.869v12.17c0,0.479,0.389,0.869,0.869,0.869h17.387c0.479,0,0.869-0.39,0.869-0.869V3.915C19.562,3.435,19.173,3.045,18.693,3.045 M18.693,16.085H1.307V9.13h17.387V16.085z M18.693,5.653H1.307V3.915h17.387V5.653zM3.48,12.608h7.824c0.24,0,0.435-0.195,0.435-0.436c0-0.239-0.194-0.435-0.435-0.435H3.48c-0.24,0-0.435,0.195-0.435,0.435C3.045,12.413,3.24,12.608,3.48,12.608 M3.48,14.347h6.085c0.24,0,0.435-0.194,0.435-0.435s-0.195-0.435-0.435-0.435H3.48c-0.24,0-0.435,0.194-0.435,0.435S3.24,14.347,3.48,14.347"
+                clip-rule="evenodd"></path>
+            </svg></span>
+          <span class="sidebar-text">Donasi</span>
         </a>
       </li>
-      <li class="nav-item {{ Request::segment(1) == 'transactions' ? 'active' : '' }}">
-        <a href="/transactions" class="nav-link">
+      <li class="nav-item {{ Request::segment(1) == 'donatur' ? 'active' : '' }}">
+        <a href="/donatur" class="nav-link">
+          <span class="sidebar-icon"><svg class="icon icon-xs me-2" fill="currentColor" viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg">
+              {{-- <path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z"></path> --}}
+              <path fill-rule="evenodd"
+                d="M16.588,3.411h-4.466c0.042-0.116,0.074-0.236,0.074-0.366c0-0.606-0.492-1.098-1.099-1.098H8.901c-0.607,0-1.098,0.492-1.098,1.098c0,0.13,0.033,0.25,0.074,0.366H3.41c-0.606,0-1.098,0.492-1.098,1.098c0,0.607,0.492,1.098,1.098,1.098h0.366V16.59c0,0.808,0.655,1.464,1.464,1.464h9.517c0.809,0,1.466-0.656,1.466-1.464V5.607h0.364c0.607,0,1.1-0.491,1.1-1.098C17.688,3.903,17.195,3.411,16.588,3.411z M8.901,2.679h2.196c0.202,0,0.366,0.164,0.366,0.366S11.3,3.411,11.098,3.411H8.901c-0.203,0-0.366-0.164-0.366-0.366S8.699,2.679,8.901,2.679z M15.491,16.59c0,0.405-0.329,0.731-0.733,0.731H5.241c-0.404,0-0.732-0.326-0.732-0.731V5.607h10.983V16.59z M16.588,4.875H3.41c-0.203,0-0.366-0.164-0.366-0.366S3.208,4.143,3.41,4.143h13.178c0.202,0,0.367,0.164,0.367,0.366S16.79,4.875,16.588,4.875zM6.705,14.027h6.589c0.202,0,0.366-0.164,0.366-0.366s-0.164-0.367-0.366-0.367H6.705c-0.203,0-0.366,0.165-0.366,0.367S6.502,14.027,6.705,14.027z M6.705,11.83h6.589c0.202,0,0.366-0.164,0.366-0.365c0-0.203-0.164-0.367-0.366-0.367H6.705c-0.203,0-0.366,0.164-0.366,0.367C6.339,11.666,6.502,11.83,6.705,11.83z M6.705,9.634h6.589c0.202,0,0.366-0.164,0.366-0.366c0-0.202-0.164-0.366-0.366-0.366H6.705c-0.203,0-0.366,0.164-0.366,0.366C6.339,9.47,6.502,9.634,6.705,9.634z"
+                clip-rule="evenodd"></path>
+            </svg></span>
+          <span class="sidebar-text">Donatur</span>
+        </a>
+      </li>
+      <li class="nav-item {{ Request::segment(1) == 'pnmdonatur' ? 'active' : '' }}">
+        <a href="/pnmdonatur" class="nav-link">
+          <span class="sidebar-icon"><svg class="icon icon-xs me-2" fill="currentColor" viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg">
+              {{-- <path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z"></path> --}}
+              <path fill-rule="evenodd"
+                d="M17.222,5.041l-4.443-4.414c-0.152-0.151-0.356-0.235-0.571-0.235h-8.86c-0.444,0-0.807,0.361-0.807,0.808v17.602c0,0.448,0.363,0.808,0.807,0.808h13.303c0.448,0,0.808-0.36,0.808-0.808V5.615C17.459,5.399,17.373,5.192,17.222,5.041zM15.843,17.993H4.157V2.007h7.72l3.966,3.942V17.993z"
+                clip-rule="evenodd"></path>
+            </svg></span>
+          <span class="sidebar-text">Penerima Donasi</span>
+        </a>
+      </li>
+      <li class="nav-item {{ Request::segment(1) == 'kpndonasi' ? 'active' : '' }}">
+        <a href="/kpndonasi" class="nav-link">
           <span class="sidebar-icon"><svg class="icon icon-xs me-2" fill="currentColor" viewBox="0 0 20 20"
               xmlns="http://www.w3.org/2000/svg">
               <path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z"></path>
@@ -104,234 +136,23 @@
                 d="M18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z"
                 clip-rule="evenodd"></path>
             </svg></span>
-          <span class="sidebar-text">Transactions</span>
+          <span class="sidebar-text">Data Keluarga</span>
         </a>
       </li>
-      <li class="nav-item">
-        <a href="https://themesberg.com/product/laravel/volt-pro-admin-dashboard-template" target="_blank" class="nav-link d-flex justify-content-between">
-          <span>
-            <span class="sidebar-icon">
-              <svg class="icon icon-xs me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd"
-                  d="M12 1.586l-4 4v12.828l4-4V1.586zM3.707 3.293A1 1 0 002 4v10a1 1 0 00.293.707L6 18.414V5.586L3.707 3.293zM17.707 5.293L14 1.586v12.828l2.293 2.293A1 1 0 0018 16V6a1 1 0 00-.293-.707z"
-                  clip-rule="evenodd"></path>
-              </svg>
-            </span>
-            <span class="sidebar-text">Calendar</span>
-          </span>
-          <span>
-            <span class="badge badge-sm bg-secondary ms-1">Pro</span>
-          </span>
-        </a>
-        </li>
-      <li class="nav-item">
-        <a href="https://themesberg.com/product/laravel/volt-pro-admin-dashboard-template" target="_blank" class="nav-link d-flex justify-content-between">
-          <span>
-            <span class="sidebar-icon">
-              <svg class="icon icon-xs me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd"
-                  d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
-                  clip-rule="evenodd"></path>
-              </svg>
-            </span>
-            <span class="sidebar-text">Map</span>
-          </span>
-          <span>
-            <span class="badge badge-sm bg-secondary ms-1">Pro</span>
-          </span>
-        </a>
-        </li>
-      <li class="nav-item">
-        <span
-          class="nav-link {{ Request::segment(1) !== 'bootstrap-tables' ? 'collapsed' : '' }} d-flex justify-content-between align-items-center"
-          data-bs-toggle="collapse" data-bs-target="#submenu-app">
-          <span>
-            <span class="sidebar-icon"><svg class="icon icon-xs me-2" fill="currentColor" viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd"
-                  d="M5 4a3 3 0 00-3 3v6a3 3 0 003 3h10a3 3 0 003-3V7a3 3 0 00-3-3H5zm-1 9v-1h5v2H5a1 1 0 01-1-1zm7 1h4a1 1 0 001-1v-1h-5v2zm0-4h5V8h-5v2zM9 8H4v2h5V8z"
-                  clip-rule="evenodd"></path>
-              </svg></span>
-            <span class="sidebar-text">Tables</span>
-          </span>
-          <span class="link-arrow"><svg class="icon icon-sm" fill="currentColor" viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg">
-              <path fill-rule="evenodd"
-                d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                clip-rule="evenodd"></path>
-            </svg></span>
-        </span>
-        <div class="multi-level collapse {{ Request::segment(1) == 'bootstrap-tables' ? 'show' : '' }}" role="list"
-          id="submenu-app" aria-expanded="false">
-          <ul class="flex-column nav">
-            <li class="nav-item {{ Request::segment(1) == 'bootstrap-tables' ? 'active' : '' }}">
-              <a class="nav-link" href="/bootstrap-tables">
-                <span class="sidebar-text">Bootstrap Tables</span>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </li>
-      <li class="nav-item">
-        <span class="nav-link collapsed d-flex justify-content-between align-items-center" data-bs-toggle="collapse"
-          data-bs-target="#submenu-pages">
-          <span>
-            <span class="sidebar-icon"><svg class="icon icon-xs me-2" fill="currentColor" viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd"
-                  d="M2 5a2 2 0 012-2h8a2 2 0 012 2v10a2 2 0 002 2H4a2 2 0 01-2-2V5zm3 1h6v4H5V6zm6 6H5v2h6v-2z"
-                  clip-rule="evenodd"></path>
-                <path d="M15 7h1a2 2 0 012 2v5.5a1.5 1.5 0 01-3 0V7z"></path>
-              </svg></span>
-            <span class="sidebar-text">Page examples</span>
-          </span>
-          <span class="link-arrow"><svg class="icon icon-sm" fill="currentColor" viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg">
-              <path fill-rule="evenodd"
-                d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                clip-rule="evenodd"></path>
-            </svg></span>
-        </span>
-        <div class="multi-level collapse" role="list" id="submenu-pages" aria-expanded="false">
-          <ul class="flex-column nav">
-            <li class="nav-item">
-              <a class="nav-link" href="{{ route('profile-example') }}">
-                <span class="sidebar-text">Profile</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{{ route('login-example') }}">
-                <span class="sidebar-text">Sign In</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{{ route('register-example') }}">
-                <span class="sidebar-text">Sign Up</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{{ route('forgot-password-example') }}">
-                <span class="sidebar-text">Forgot password</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/reset-password-example">
-                <span class="sidebar-text">Reset password</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/lock">
-                <span class="sidebar-text">Lock</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/404">
-                <span class="sidebar-text">404 Not Found</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/500">
-                <span class="sidebar-text">500 Not Found</span>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </li>
-      <li class="nav-item">
-        <span class="nav-link collapsed d-flex justify-content-between align-items-center" data-bs-toggle="collapse"
-          data-bs-target="#submenu-components">
-          <span>
-            <span class="sidebar-icon"><svg class="icon icon-xs me-2" fill="currentColor" viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg">
-                <path d="M4 3a2 2 0 100 4h12a2 2 0 100-4H4z"></path>
-                <path fill-rule="evenodd"
-                  d="M3 8h14v7a2 2 0 01-2 2H5a2 2 0 01-2-2V8zm5 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z"
-                  clip-rule="evenodd"></path>
-              </svg></span>
-            <span class="sidebar-text">Components</span>
-          </span>
-          <span class="link-arrow"><svg class="icon icon-sm" fill="currentColor" viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg">
-              <path fill-rule="evenodd"
-                d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                clip-rule="evenodd"></path>
-            </svg></span>
-        </span>
-        <div
-          class="multi-level collapse {{ Request::segment(1) == 'buttons' || Request::segment(1) == 'notifications' || Request::segment(1) == 'forms' || Request::segment(1) == 'modals' || Request::segment(1) == 'typography' ? 'show' : '' }}"
-          role="list" id="submenu-components" aria-expanded="false">
-          <ul class="flex-column nav">
-            <li class="nav-item {{ Request::segment(1) == 'buttons' ? 'active' : '' }}">
-              <a class="nav-link" href="/buttons">
-                <span class="sidebar-text">Buttons</span>
-              </a>
-            </li>
-            <li class="nav-item {{ Request::segment(1) == 'notifications' ? 'active' : '' }}">
-              <a class="nav-link" href="/notifications">
-                <span class="sidebar-text">Notifications</span>
-              </a>
-            </li>
-            <li class="nav-item {{ Request::segment(1) == 'forms' ? 'active' : '' }}">
-              <a class="nav-link" href="/forms">
-                <span class="sidebar-text">Forms</span>
-              </a>
-            </li>
-            <li class="nav-item {{ Request::segment(1) == 'modals' ? 'active' : '' }}">
-              <a class="nav-link" href="/modals">
-                <span class="sidebar-text">Modals</span>
-              </a>
-            </li>
-            <li class="nav-item {{ Request::segment(1) == 'typography' ? 'active' : '' }}">
-              <a class="nav-link" href="/typography">
-                <span class="sidebar-text">Typography</span>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </li>
-      <li role="separator" class="dropdown-divider mt-4 mb-3 border-gray-700"></li>
-      <li class="nav-item">
-        <a href="/documentation/getting-started/overview/index.html" target="_blank"
-          class="nav-link d-flex align-items-center">
+      <li class="nav-item {{ Request::segment(1) == 'survey' ? 'active' : '' }}">
+        <a href="/survey" class="nav-link">
           <span class="sidebar-icon"><svg class="icon icon-xs me-2" fill="currentColor" viewBox="0 0 20 20"
               xmlns="http://www.w3.org/2000/svg">
+              <path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z"></path>
               <path fill-rule="evenodd"
-                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z"
+                d="M18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z"
                 clip-rule="evenodd"></path>
             </svg></span>
-          <span class="sidebar-text">Documentation </span> <span><span
-              class="badge badge-sm bg-secondary ms-1">v1.0</span></span>
+          <span class="sidebar-text">Survey</span>
         </a>
       </li>
-      <li class="nav-item">
-        <a href="https://themesberg.com" target="_blank" class="nav-link d-flex align-items-center">
-          <span class="sidebar-icon me-2">
-            <img class="me-2" src="/assets/img/themesberg.svg" height="20" width="20" alt="Themesberg Logo">
-          </span>
-          <span class="sidebar-text">Themesberg</span>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a href="https://updivision.com" target="_blank" class="nav-link d-flex align-items-center">
-          <span class="sidebar-icon me-2">
-            <img class="me-2" src="/assets/img/updivision.png" height="20" width="20" alt="Themesberg Logo">
-          </span>
-          <span class="sidebar-text">Updivision</span>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a href="/upgrade-to-pro"
-          class="btn btn-secondary d-flex align-items-center justify-content-center btn-upgrade-pro">
-          <span class="sidebar-icon d-inline-flex align-items-center justify-content-center">
-            <svg class="icon icon-xs me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-              <path fill-rule="evenodd"
-                d="M12.395 2.553a1 1 0 00-1.45-.385c-.345.23-.614.558-.822.88-.214.33-.403.713-.57 1.116-.334.804-.614 1.768-.84 2.734a31.365 31.365 0 00-.613 3.58 2.64 2.64 0 01-.945-1.067c-.328-.68-.398-1.534-.398-2.654A1 1 0 005.05 6.05 6.981 6.981 0 003 11a7 7 0 1011.95-4.95c-.592-.591-.98-.985-1.348-1.467-.363-.476-.724-1.063-1.207-2.03zM12.12 15.12A3 3 0 017 13s.879.5 2.5.5c0-1 .5-4 1.25-4.5.5 1 .786 1.293 1.371 1.879A2.99 2.99 0 0113 13a2.99 2.99 0 01-.879 2.121z"
-                clip-rule="evenodd"></path>
-            </svg>
-          </span>
-          <span>Upgrade to Pro</span>
-        </a>
-      </li>
-    </ul>
+      
+      
+      
   </div>
 </nav>

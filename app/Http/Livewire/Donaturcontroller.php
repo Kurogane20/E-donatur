@@ -3,11 +3,15 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
-use App\Models\User;
+use App\Models\donatur;
+use Livewire\WithPagination;
 
-class Users extends Component
+class Donaturcontroller extends Component
 {
-    public $isOpen;    
+    public $isOpen;
+    public $isOpenDetail = false;
+    public $donatur;
+    public $donaturDetail;    
     public $full_name;
     public $nik;
     public $tempat_tanggal_lahir;
@@ -19,22 +23,30 @@ class Users extends Component
     public $kode_pos;
     public $nomor_ponsel;
     public $nomor_telepon;
-    Public $email;
+    public $status_donasi;
     public $idToUpdate;
     public $editMode = false; // Tambahkan variabel editMode dan inisialisasi nilainya dengan false
-    public $modalTitle = "Tambah staff"; //
-    public $isOpenDetail = false;
-    public $userDetail;
-    public $user;
-    public$status;
+    public $modalTitle = "Tambah Donatur"; // Tambahkan variabel modalTitle dan inisialisasi judul modal dengan "Create New Doansi"
+    use WithPagination;
+    protected $paginationTheme = 'bootstrap';
+    protected $listeners = ['refreshComponent' => '$refresh'];
+    public $search = '';
 
     public function render()
     {
-        $users = User::all();
-        return view('livewire.users', compact('users'));
+        $donaturs = donatur::where('full_name', 'like', '%'.$this->search.'%')
+                           ->orWhere('nik', 'like', '%'.$this->search.'%')
+                           ->orWhere('alamat1', 'like', '%'.$this->search.'%')
+                           ->orWhere('nomor_ponsel', 'like', '%'.$this->search.'%')
+                           ->paginate(10); // Change the value according to your preference
+
+        return view('livewire.donatur', ['donaturs' => $donaturs ]);
     }
 
-    public function create(){
+    public function create()
+    {
+        $this->editMode = false;
+        $this->modalTitle = "Tambah Donatur";
         $this->resetInputFields();
         $this->openModal();
     }
@@ -46,13 +58,10 @@ class Users extends Component
             'nik' => 'required',
             'tempat_tanggal_lahir' =>'required',
             'alamat1' => 'required',            
-            'nomor_ponsel' => 'required',
-            'email' => 'required'            
+            'nomor_ponsel' => 'required',            
         ]);
 
-        $defaultPassword = '12345678';
-
-        User::create([
+        donatur::create([
             'full_name' => $this->full_name,
             'nik' => $this->nik,
             'tempat_tanggal_lahir' => $this->tempat_tanggal_lahir,
@@ -64,53 +73,48 @@ class Users extends Component
             'kode_pos' => $this->kode_pos,
             'nomor_ponsel'=> $this->nomor_ponsel,
             'nomor_telepon'=> $this->nomor_telepon,
-            'email' => $this->email,
-            'password' => bcrypt($defaultPassword) ,
-            'status' => $this->status
         ]);
 
-        session()->flash('message', 'Staff berhasil di tambah');
+        session()->flash('message', 'Donatur created successfully.');
         $this->closeModal();
         $this->resetInputFields();
     }
 
-    public function edit($id){
+    public function edit($id)
+    {
         $this->idToUpdate = $id;
-        $user = User::findOrFail($id);
-
-        $this->editMode = true;
-        $this->modalTitle = "Edit Staff";
-        
+        $donatur = donatur::findOrFail($id);
+        $this->editMode = true; // Atur editMode menjadi true saat melakukan edit
+        $this->modalTitle = "Edit Donatur"; // Ganti judul modal menjadi "Edit Doansi"
         $this->id = $id;
-        $this->full_name = $user->full_name;
-        $this->nik = $user->nik;
-        $this->tempat_tanggal_lahir = $user->tempat_tanggal_lahir;
-        $this->alamat1 = $user->alamat1;
-        $this->alamat2 = $user->alamat2;
-        $this->kecamatan = $user->kecamatan;
-        $this->kelurahan = $user->kelurahan;
-        $this->kota = $user->kota;
-        $this->kode_pos = $user->kode_pos;
-        $this->nomor_ponsel = $user->nomor_ponsel;
-        $this->nomor_telepon = $user->nomor_telepon;
-        $this->email = $user->email;
-        $this->status = $user->status;
+        $this->full_name = $donatur->full_name;
+        $this->nik = $donatur->nik;
+        $this->tempat_tanggal_lahir = $donatur->tempat_tanggal_lahir;
+        $this->alamat1 = $donatur->alamat1;
+        $this->alamat2 = $donatur->alamat2;
+        $this->kecamatan = $donatur->kecamatan;
+        $this->kelurahan = $donatur->kelurahan;
+        $this->kota = $donatur->kota;
+        $this->kode_pos = $donatur->kode_pos;
+        $this->nomor_ponsel = $donatur->nomor_ponsel;
+        $this->nomor_telepon = $donatur->nomor_telepon;
         $this->openModal();
+        
     }
 
-    public function update(){
+    public function update()
+    {
         $this->validate([
             'full_name' => 'required',
             'nik' => 'required',
             'tempat_tanggal_lahir' =>'required',
             'alamat1' => 'required',            
-            'nomor_ponsel' => 'required',
-            'email' => 'required'            
+            'nomor_ponsel' => 'required',              
         ]);
-        
-        $user = User::find($this->idToUpdate);
 
-        $user->update([
+        $donatur = donatur::find($this->idToUpdate);
+
+        $donatur->update([
             'full_name' => $this->full_name,
             'nik' => $this->nik,
             'tempat_tanggal_lahir' => $this->tempat_tanggal_lahir,
@@ -122,18 +126,19 @@ class Users extends Component
             'kode_pos' => $this->kode_pos,
             'nomor_ponsel'=> $this->nomor_ponsel,
             'nomor_telepon'=> $this->nomor_telepon,
-            'email' => $this->email,
-            'status' => $this->status
+            'status_donasi' => $this->status_donasi
         ]);
 
-        session()->flash('message', 'Staff berhasil updated ');
+        session()->flash('message', 'Donatur updated successfully.');
         $this->closeModal();
         $this->resetInputFields();
+
     }
 
-    public function delete($id){
-        User::find($id)->delete();
-        session()->flash('message', 'staff berhasil dihapus');
+    public function delete($id)
+    {
+        donatur::find($id)->delete();
+        session()->flash('message', 'Donatur Deleted successfully.');
     }
 
     public function resetInputFields()
@@ -150,7 +155,6 @@ class Users extends Component
         $this->kode_pos = '';
         $this->nomor_ponsel = '';
         $this->nomor_telepon = '';
-        $this->email = '';
     }
 
     public function openModal()
@@ -160,19 +164,19 @@ class Users extends Component
 
     public function closeModal()
     {
-        $this->isOpen = false;  
+        $this->isOpen = false;
     }
 
-     public function showDetail($id)
+    public function showDetail($id)
     {
         // If detail view is already open for the clicked donation, close it
-        if ($this->isOpenDetail && $this->userDetail->id == $id) {
+        if ($this->isOpenDetail && $this->donaturDetail->id == $id) {
             $this->closeDetail();
         } else {
             // Otherwise, open the detail view for the clicked donation
-            $this->userDetail = User::findOrFail($id);
+            $this->donaturDetail = donatur::findOrFail($id);
             $this->isOpenDetail = true;
-            $this->user = $this->userDetail;
+            $this->donatur = $this->donaturDetail;
         }
     }
 
@@ -180,4 +184,6 @@ class Users extends Component
     {
         $this->isOpenDetail = false;
     }
+
+    
 }

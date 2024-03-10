@@ -25,6 +25,12 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\ResetPasswordExample;
 use App\Http\Livewire\UpgradeToPro;
 use App\Http\Livewire\Users;
+use App\Http\Livewire\Donasi;
+use App\Http\Livewire\Donaturcontroller;
+use App\Http\Livewire\PenerimaDonaturController;
+use App\Http\Livewire\KeluargaPenerimaDOnasiController;
+use App\Http\Livewire\SurveyController;
+use Illuminate\Routing\Route as RoutingRoute;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,9 +56,11 @@ Route::get('/reset-password/{id}', ResetPassword::class)->name('reset-password')
 Route::get('/404', Err404::class)->name('404');
 Route::get('/500', Err500::class)->name('500');
 Route::get('/upgrade-to-pro', UpgradeToPro::class)->name('upgrade-to-pro');
+Route::get('/profile', Profile::class)->name('profile');
+
+
 
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', Profile::class)->name('profile');
     Route::get('/profile-example', ProfileExample::class)->name('profile-example');
     Route::get('/users', Users::class)->name('users');
     Route::get('/login-example', LoginExample::class)->name('login-example');
@@ -68,4 +76,16 @@ Route::middleware('auth')->group(function () {
     Route::get('/forms', Forms::class)->name('forms');
     Route::get('/modals', Modals::class)->name('modals');
     Route::get('/typography', Typography::class)->name('typography');
+    Route::get('/donasi', Donasi::class)->name('donasi');
+    Route::get('/donatur', Donaturcontroller::class)->name('donatur');
+    Route::get('/pnmdonatur', PenerimaDonaturController::class)->name('pnmdonatur');
+    Route::get('/kpndonasi', KeluargaPenerimaDOnasiController::class)->name('kpndonasi');
+    Route::get('/survey', SurveyController::class)->name('survey');
+    Route::get('/fetch-donatur-options', [Donasi::class, 'getDonaturOptions'])->name('fetch.donatur.options');
+    Route::get('/fetch-pdon-options', [KeluargaPenerimaDOnasiController::class, 'getPdonOptions'])->name('fetch.pdon.options');
+    Route::get('/fetch-staff-options', [SurveyController::class, 'getStaffOption'])->name('fetch.staff.options');
+    Route::get('/fetch-surveypdon-options', [SurveyController::class, 'getPdonOption'])->name('fetch.surveypdon.options');
+    
+
+    
 });
