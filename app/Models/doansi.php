@@ -13,6 +13,6 @@ class doansi extends Model
     protected $guarded = [];
 
     public function donatur() {
-        return $this->belongsTo(Donatur::class, 'id_donatur');
+        return $this->belongsTo(donatur::class, 'id_donatur');
     }
 }

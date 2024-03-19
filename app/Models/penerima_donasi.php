@@ -32,6 +32,6 @@ class penerima_donasi extends Model
 
     public function keluarga_penerima_donasi()
     {
-        return $this->hasMany(Keluarga_penerima_donasi::class, 'id_pdon');
+        return $this->hasMany(keluarga_penerima_donasi::class, 'id_pdon');
     }
 }
