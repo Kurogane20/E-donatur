@@ -37,6 +37,7 @@ class KeluargaPenerimaDOnasiController extends Component
     public $keluargaDetail;
     use WithPagination;
     protected $listeners = ['refreshComponent' => '$refresh'];
+    protected $paginationTheme = 'bootstrap';
 
     public function render()
     {

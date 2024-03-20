@@ -27,6 +27,7 @@ class Donasi extends Component
     public $donasi;
     use WithPagination;
     protected $listeners = ['refreshComponent' => '$refresh'];
+    protected $paginationTheme = 'bootstrap';
 
 
 

@@ -1,13 +1,13 @@
 <nav id="sidebarMenu" class="sidebar d-lg-block bg-gray-800 text-white collapse" data-simplebar>
   <div class="sidebar-inner px-2 pt-3">
     <div class="user-card d-flex d-md-none align-items-center justify-content-between justify-content-md-center pb-4">
-      <div class="d-flex align-items-center">
+      {{-- <div class="d-flex align-items-center">
         <div class="avatar-lg me-4">
           <img src="/assets/img/team/profile-picture-3.jpg" class="card-img-top rounded-circle border-white"
             alt="Bonnie Green">
         </div>
         
-      </div>
+      </div> --}}
       <div class="collapse-close d-md-none">
         <a href="#sidebarMenu" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu"
           aria-expanded="true" aria-label="Toggle navigation">
@@ -71,25 +71,7 @@
           </ul>
         </div>
       </li> --}}
-      @if(auth()->user()->status == 'admin')
-        <li class="nav-item {{ Request::segment(1) == 'users' ? 'active' : '' }}">
-          <a href="/users" class="nav-link">
-            <span class="sidebar-icon"><svg class="icon icon-xs me-2" fill="currentColor" viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg">
-                {{-- <path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z"></path> --}}
-                <path fill-rule="evenodd"
-                  d="M14.023,12.154c1.514-1.192,2.488-3.038,2.488-5.114c0-3.597-2.914-6.512-6.512-6.512
-								c-3.597,0-6.512,2.916-6.512,6.512c0,2.076,0.975,3.922,2.489,5.114c-2.714,1.385-4.625,4.117-4.836,7.318h1.186
-								c0.229-2.998,2.177-5.512,4.86-6.566c0.853,0.41,1.804,0.646,2.813,0.646c1.01,0,1.961-0.236,2.812-0.646
-								c2.684,1.055,4.633,3.568,4.859,6.566h1.188C18.648,16.271,16.736,13.539,14.023,12.154z M10,12.367
-								c-2.943,0-5.328-2.385-5.328-5.327c0-2.943,2.385-5.328,5.328-5.328c2.943,0,5.328,2.385,5.328,5.328
-								C15.328,9.982,12.943,12.367,10,12.367z"
-                  clip-rule="evenodd"></path>
-              </svg></span>
-            <span class="sidebar-text">Staff</span>
-          </a>
-        </li>
-      @endif
+      
       
       <li class="nav-item {{ Request::segment(1) == 'donasi' ? 'active' : '' }}">
         <a href="/donasi" class="nav-link">
@@ -151,6 +133,25 @@
           <span class="sidebar-text">Survey</span>
         </a>
       </li>
+      @if(auth()->user()->status == 'admin')
+        <li class="nav-item {{ Request::segment(1) == 'users' ? 'active' : '' }}">
+          <a href="/users" class="nav-link">
+            <span class="sidebar-icon"><svg class="icon icon-xs me-2" fill="currentColor" viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg">
+                {{-- <path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z"></path> --}}
+                <path fill-rule="evenodd"
+                  d="M14.023,12.154c1.514-1.192,2.488-3.038,2.488-5.114c0-3.597-2.914-6.512-6.512-6.512
+								c-3.597,0-6.512,2.916-6.512,6.512c0,2.076,0.975,3.922,2.489,5.114c-2.714,1.385-4.625,4.117-4.836,7.318h1.186
+								c0.229-2.998,2.177-5.512,4.86-6.566c0.853,0.41,1.804,0.646,2.813,0.646c1.01,0,1.961-0.236,2.812-0.646
+								c2.684,1.055,4.633,3.568,4.859,6.566h1.188C18.648,16.271,16.736,13.539,14.023,12.154z M10,12.367
+								c-2.943,0-5.328-2.385-5.328-5.327c0-2.943,2.385-5.328,5.328-5.328c2.943,0,5.328,2.385,5.328,5.328
+								C15.328,9.982,12.943,12.367,10,12.367z"
+                  clip-rule="evenodd"></path>
+              </svg></span>
+            <span class="sidebar-text">Staff</span>
+          </a>
+        </li>
+      @endif
       
       
       

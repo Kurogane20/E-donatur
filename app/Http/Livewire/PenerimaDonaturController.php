@@ -35,6 +35,7 @@ class PenerimaDonaturController extends Component
     use WithPagination;
     protected $listeners = ['refreshComponent' => '$refresh'];
     public $search = '';
+    protected $paginationTheme = 'bootstrap';
 
     public function render()
     {
