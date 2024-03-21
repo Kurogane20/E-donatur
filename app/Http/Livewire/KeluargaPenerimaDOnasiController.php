@@ -157,7 +157,7 @@ class KeluargaPenerimaDOnasiController extends Component
 
     public function delete($id)
     {
-        keluarga_penerima_donasi::find($id)->delete;
+        keluarga_penerima_donasi::find($id)->delete();
         session()->flash('message', 'Keluarga Penerima Donasi Berhasi Dihapus');
     }
 
