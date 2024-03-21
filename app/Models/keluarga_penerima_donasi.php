@@ -12,6 +12,6 @@ class keluarga_penerima_donasi extends Model
    protected $guarded = [];
 
     public function penerima_donasi() {
-        return $this->belongsTo(Penerima_donasi::class, 'id_pdon');
+        return $this->belongsTo(penerima_donasi::class, 'id_pdon');
     }
 }

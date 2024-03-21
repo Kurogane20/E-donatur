@@ -1,4 +1,4 @@
-<title>Volt Laravel Dashboard</title>
+<title>Dashboard</title>
 
 <div class="row">
     {{-- <div class="col-12 mb-4">
@@ -31,6 +31,10 @@
                         <div class="icon-shape icon-shape-primary rounded me-4 me-sm-0">
                             <svg class="icon" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"></path></svg>
                         </div>
+                        <div class="d-sm-none">
+                            <h2 class="fw-extrabold h5"> Jumlah Donatur</h2>
+                            <h3 class="mb-1">{{ $totalDonatur }}</h3>
+                        </div>
                         
                     </div>
                     <div class="col-12 col-xl-7 px-xl-0">
@@ -58,6 +62,10 @@
                     <div class="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
                         <div class="icon-shape icon-shape-secondary rounded me-4 me-sm-0">
                             <svg class="icon" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z" clip-rule="evenodd"></path></svg>
+                        </div>
+                        <div class="d-sm-none">
+                            <h2 class="fw-extrabold h5"> Jumlah Staff</h2>
+                            <h3 class="mb-1">{{ $totalUser }}</h3>
                         </div>
                         
                     </div>
@@ -88,8 +96,8 @@
                             <svg class="icon" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z" clip-rule="evenodd"></path></svg>
                         </div>
                         <div class="d-sm-none">
-                            <h2 class="fw-extrabold h5"> Bounce Rate</h2>
-                            <h3 class="mb-1">50.88%</h3>
+                            <h2 class="fw-extrabold h5"> Jumlah Penerima Donasi</h2>
+                            <h3 class="mb-1">{{ $totalPenerimaDonasi }}</h3>
                         </div>
                     </div>
                     <div class="col-12 col-xl-7 px-xl-0">
@@ -156,7 +164,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-xxl-6 mb-4">
+            {{-- <div class="col-12 col-xxl-6 mb-4">
                 <div class="card border-0 shadow">
                     <div class="card-header border-bottom d-flex align-items-center justify-content-between">
                        <h2 class="fs-5 fw-bold mb-0">Team members</h2>
@@ -267,8 +275,8 @@
                         </ul>
                     </div>
                 </div>
-            </div>
-            <div class="col-12 col-xxl-6 mb-4">
+            </div> --}}
+            {{-- <div class="col-12 col-xxl-6 mb-4">
                 <div class="card border-0 shadow">
                     <div class="card-header border-bottom d-flex align-items-center justify-content-between">
                         <h2 class="fs-5 fw-bold mb-0">Progress track</h2>
@@ -345,10 +353,10 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
-    <div class="col-12 col-xl-4">
+    {{-- <div class="col-12 col-xl-4">
         <div class="col-12 px-0 mb-4">
             <div class="card border-0 shadow">
                 <div class="card-header d-flex flex-row align-items-center flex-0 border-bottom">
@@ -459,5 +467,5 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 </div>

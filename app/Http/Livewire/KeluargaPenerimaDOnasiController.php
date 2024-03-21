@@ -37,6 +37,7 @@ class KeluargaPenerimaDOnasiController extends Component
     public $keluargaDetail;
     use WithPagination;
     protected $listeners = ['refreshComponent' => '$refresh'];
+    protected $paginationTheme = 'bootstrap';
 
     public function render()
     {
@@ -156,7 +157,7 @@ class KeluargaPenerimaDOnasiController extends Component
 
     public function delete($id)
     {
-        keluarga_penerima_donasi::find($id)->delete;
+        keluarga_penerima_donasi::find($id)->delete();
         session()->flash('message', 'Keluarga Penerima Donasi Berhasi Dihapus');
     }
 
